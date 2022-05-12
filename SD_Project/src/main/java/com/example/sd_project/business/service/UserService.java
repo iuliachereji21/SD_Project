@@ -100,4 +100,9 @@ public class UserService {
             return newCustomer;
         }
     }
+
+    public User getUserByEmail(String email){
+        ArrayList<User> users = new ArrayList<>(userRepository.findByEmail(email));
+        return users.get(0);
+    }
 }
