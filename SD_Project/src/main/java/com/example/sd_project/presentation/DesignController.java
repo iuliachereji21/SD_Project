@@ -159,23 +159,4 @@ public class DesignController {
 
     }
 
-    /*@GetMapping("/myAccount/pdf")
-    public void exportMenuToPdfMyAccount(@RequestHeader String token, @RequestBody DesignDTO designDTO, HttpServletResponse response){
-        User user = JwtToken.getUser(token);
-        if(user == null){
-            logger.warn("An unauthorized access was atempted at endpoint: "+ "/admin/"+id+"/"+token+"/restaurants/"+id_restaurant+"/pdf");
-            return;
-        }
-        if(user.getId()!=id){
-            logger.warn("An unauthorized access was atempted at endpoint: "+ "/admin/"+id+"/"+token+"/restaurants/"+id_restaurant+"/pdf");
-            return;
-        }
-
-        response.setContentType("application/pdf");
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Menu_"+id_restaurant+".pdf";
-        response.setHeader(headerKey,headerValue);
-        foodService.createPdfOfRestaurantMenu(id_restaurant, response);
-
-    }*/
 }
