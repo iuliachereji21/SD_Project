@@ -21,7 +21,7 @@ public class Design {
     @Column
     private Date dateAndTime;
 
-    @ManyToMany(mappedBy = "designs_it_appears_in")
+    @ManyToMany(mappedBy = "designsItAppearsIn")
     private List<Product> products;
 
     @ManyToOne

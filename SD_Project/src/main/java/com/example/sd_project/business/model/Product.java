@@ -32,7 +32,7 @@ public class Product {
             joinColumns = @JoinColumn(name="product_id"),
             inverseJoinColumns = @JoinColumn(name="design_id")
     )
-    private List<Design> designs_it_appears_in;
+    private List<Design> designsItAppearsIn;
 
     public Product(long id, String name, float price, String category, String link, Store store) {
         this.id = id;
@@ -102,11 +102,15 @@ public class Product {
         this.store = store;
     }
 
-    public List<Design> getDesigns_it_appears_in() {
-        return designs_it_appears_in;
+    public List<Design> getDesignsItAppearsIn() {
+        return designsItAppearsIn;
     }
 
-    public void setDesigns_it_appears_in(List<Design> designs_it_appears_in) {
-        this.designs_it_appears_in = designs_it_appears_in;
+    public void setDesignsItAppearsIn(List<Design> designsItAppearsIn) {
+        this.designsItAppearsIn = designsItAppearsIn;
+    }
+
+    public void addDesign(Design design){
+        this.designsItAppearsIn.add(design);
     }
 }

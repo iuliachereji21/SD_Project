@@ -41,7 +41,7 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProduct(ProductDTO productDTO) throws Exception{
+    public Product updateProduct(ProductDTO productDTO, Long storeId) throws Exception{
         if(productDTO.getName()==null || productDTO.getName().equals(""))
             throw new Exception("name required");
         if(productDTO.getPrice() <= 0)
@@ -52,6 +52,10 @@ public class ProductService {
             throw new Exception("link required");
 
         Product product = productRepository.getById(productDTO.getId());
+
+        if(product.getStore().getId() != storeId)
+            throw new Exception("unauthorized");
+
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
         product.setCategory(productDTO.getCategory());
@@ -60,5 +64,13 @@ public class ProductService {
         productRepository.save(product);
 
         return product;
+    }
+
+    public ArrayList<Product> getAllProducts(){
+        return productRepository.findAll();
+    }
+
+    public Product getProductById(Long id){
+        return productRepository.getById(id);
     }
 }

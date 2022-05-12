@@ -61,4 +61,8 @@ public class Customer extends User{
     public void setDesigns(List<Design> designs) {
         this.designs = designs;
     }
+
+    public void addDesign(Design design){
+        this.designs.add(design);
+    }
 }

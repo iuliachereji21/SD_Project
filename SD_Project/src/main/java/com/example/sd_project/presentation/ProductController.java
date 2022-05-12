@@ -127,7 +127,7 @@ public class ProductController {
         }
 
         try{
-            Product product = productService.updateProduct(productDTO);
+            Product product = productService.updateProduct(productDTO, ((Admin) newuser).getStore().getId());
 
             logger.info("The product with id "+product.getId() + " was updated");
             return ResponseEntity.status(HttpStatus.OK)
@@ -137,6 +137,18 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ResponseDTO(e.getMessage()));
         }
+    }
 
+    @GetMapping("/products")
+    public ResponseEntity getAllProducts(){
+
+        ArrayList<Product> productsList = productService.getAllProducts();
+        ArrayList<ProductDTO> products = new ArrayList<>();
+        for(int i=0;i<productsList.size();i++){
+            products.add(new ProductDTO(productsList.get(i)));
+        }
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(products);
     }
 }
