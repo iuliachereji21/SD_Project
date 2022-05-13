@@ -5,6 +5,8 @@ import com.example.sd_project.business.model.Admin;
 import com.example.sd_project.business.model.Product;
 import com.example.sd_project.persistance.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,14 +27,24 @@ public class ProductService {
     public Product addProduct(ProductDTO productDTO, Admin admin) throws Exception{
         if(productDTO.getName()==null || productDTO.getName().equals(""))
             throw new Exception("name required");
-        if(productDTO.getPrice() <= 0)
+        if(productDTO.getPrice()==null || productDTO.getPrice().equals(""))
             throw new Exception("invalid price");
         if(productDTO.getCategory()==null || productDTO.getCategory().equals(""))
             throw new Exception("category required");
         if(productDTO.getLink()==null || productDTO.getLink().equals(""))
             throw new Exception("link required");
 
-        Product product = new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getCategory(), productDTO.getLink(), admin.getStore());
+        Float price;
+        try{
+            price = Float.parseFloat(productDTO.getPrice());
+            if(price<=0)
+                throw new Exception("invalid price");
+        }
+        catch (Exception e){
+            throw new Exception("invalid price");
+        }
+
+        Product product = new Product(productDTO.getName(), price, productDTO.getCategory(), productDTO.getLink(), admin.getStore());
         admin.getStore().addProduct(product);
 
         productRepository.save(product);
@@ -44,7 +56,7 @@ public class ProductService {
     public Product updateProduct(ProductDTO productDTO, Long storeId) throws Exception{
         if(productDTO.getName()==null || productDTO.getName().equals(""))
             throw new Exception("name required");
-        if(productDTO.getPrice() <= 0)
+        if(productDTO.getPrice()==null || productDTO.getPrice().equals(""))
             throw new Exception("invalid price");
         if(productDTO.getCategory()==null || productDTO.getCategory().equals(""))
             throw new Exception("category required");
@@ -53,11 +65,21 @@ public class ProductService {
 
         Product product = productRepository.getById(productDTO.getId());
 
+        Float price;
+        try{
+            price = Float.parseFloat(productDTO.getPrice());
+            if(price<=0)
+                throw new Exception("invalid price");
+        }
+        catch (Exception e){
+            throw new Exception("invalid price");
+        }
+
         if(product.getStore().getId() != storeId)
             throw new Exception("unauthorized");
 
         product.setName(productDTO.getName());
-        product.setPrice(productDTO.getPrice());
+        product.setPrice(price);
         product.setCategory(productDTO.getCategory());
         product.setLink(productDTO.getLink());
 

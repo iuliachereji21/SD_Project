@@ -77,12 +77,12 @@ public class DesignController {
                 .body(designs);
     }
 
-    @GetMapping("/myAccount")
+    @GetMapping("/myDesigns")
     public ResponseEntity getDesignsByCustomer(@RequestHeader String token){
 
         User user = JwtToken.getUser(token);
         if(user == null){
-            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myAccount");
+            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myDesigns");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ResponseDTO("unauthorized"));
         }
@@ -90,13 +90,13 @@ public class DesignController {
         User newuser = userService.getUserByEmail(user.getEmail());
 
         if(newuser == null){
-            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myAccount");
+            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myDesigns");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ResponseDTO("unauthorized"));
         }
 
         if(!(newuser instanceof Customer)){
-            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myAccount");
+            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myDesigns");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ResponseDTO("unauthorized"));
         }
@@ -111,12 +111,12 @@ public class DesignController {
                 .body(designs);
     }
 
-    @PatchMapping("/myAccount")
+    @PatchMapping("/myDesigns")
     public ResponseEntity updateDesign(@RequestHeader String token, @RequestBody DesignDTO designDTO){
 
         User user = JwtToken.getUser(token);
         if(user == null){
-            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myAccount");
+            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myDesigns");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ResponseDTO("unauthorized"));
         }
@@ -124,13 +124,13 @@ public class DesignController {
         User newuser = userService.getUserByEmail(user.getEmail());
 
         if(newuser == null){
-            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myAccount");
+            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myDesigns");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ResponseDTO("unauthorized"));
         }
 
         if(!(newuser instanceof Customer)){
-            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myAccount");
+            logger.warn("An unauthorized access was atempted at endpoint: "+ "/myDesigns");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ResponseDTO("unauthorized"));
         }
@@ -148,7 +148,7 @@ public class DesignController {
         }
     }
 
-    @GetMapping("/designs/pdf")
+    @PostMapping("/designs/pdf")
     public void exportMenuToPdf(@RequestBody DesignDTO designDTO, HttpServletResponse response){
 
         response.setContentType("application/pdf");

@@ -6,7 +6,7 @@ import com.example.sd_project.business.model.Product;
 public class ProductDTO {
     private long id;
     private String name;
-    private float price;
+    private String price;
     private String category;
     private String link;
 
@@ -26,11 +26,11 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -55,7 +55,7 @@ public class ProductDTO {
         this.category= product.getCategory();
         this.link = product.getLink();
         this.name = product.getName();
-        this.price = product.getPrice();
+        this.price = String.valueOf(product.getPrice());
     }
 
     public ProductDTO() {
