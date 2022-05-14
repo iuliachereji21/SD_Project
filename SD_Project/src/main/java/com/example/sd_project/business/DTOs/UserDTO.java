@@ -11,6 +11,9 @@ public class UserDTO {
         this.token=token;
     }
 
+    public UserDTO() {
+    }
+
     public long getUserId() {
         return userId;
     }

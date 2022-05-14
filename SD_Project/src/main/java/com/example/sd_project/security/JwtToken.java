@@ -2,10 +2,8 @@ package com.example.sd_project.security;
 
 import com.example.sd_project.business.model.User;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 

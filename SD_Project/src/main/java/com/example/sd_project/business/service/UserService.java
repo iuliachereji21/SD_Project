@@ -2,7 +2,6 @@ package com.example.sd_project.business.service;
 
 import com.example.sd_project.business.DTOs.LogInDTO;
 import com.example.sd_project.business.DTOs.RegisterDTO;
-import com.example.sd_project.business.DTOs.ResponseDTO;
 import com.example.sd_project.business.model.Customer;
 import com.example.sd_project.business.model.User;
 import com.example.sd_project.persistance.UserRepository;
@@ -25,7 +24,6 @@ public class UserService {
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public User logIn(LogInDTO logInDTO) throws Exception{
-
         if(logInDTO.getEmail()==null || logInDTO.getEmail().equals(""))
             throw new Exception("email required");
 
@@ -52,7 +50,6 @@ public class UserService {
     }
 
     public User register(RegisterDTO registerDTO) throws Exception {
-
         if(registerDTO.getEmail()==null || registerDTO.getEmail().equals(""))
             throw new Exception("email required");
 

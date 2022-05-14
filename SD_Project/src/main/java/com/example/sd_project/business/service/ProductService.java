@@ -5,10 +5,7 @@ import com.example.sd_project.business.model.Admin;
 import com.example.sd_project.business.model.Product;
 import com.example.sd_project.persistance.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
 @Service
@@ -16,9 +13,6 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
-    private StoreService storeService;
 
     public ArrayList<Product> getProductsByStoreId(Long id){
         return new ArrayList<>(productRepository.getByStore_Id(id));
@@ -44,11 +38,14 @@ public class ProductService {
             throw new Exception("invalid price");
         }
 
-        Product product = new Product(productDTO.getName(), price, productDTO.getCategory(), productDTO.getLink(), admin.getStore());
+        Product product = new Product(productDTO.getName(),
+                                      price,
+                                      productDTO.getCategory(),
+                                      productDTO.getLink(),
+                                      admin.getStore());
         admin.getStore().addProduct(product);
 
         productRepository.save(product);
-        storeService.updateStore(admin.getStore());
 
         return product;
     }

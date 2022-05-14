@@ -2,10 +2,8 @@ package com.example.sd_project.presentation;
 
 import com.example.sd_project.business.DTOs.ProductDTO;
 import com.example.sd_project.business.DTOs.ResponseDTO;
-import com.example.sd_project.business.DTOs.UserDTO;
 import com.example.sd_project.business.model.Admin;
 import com.example.sd_project.business.model.Product;
-import com.example.sd_project.business.model.Store;
 import com.example.sd_project.business.model.User;
 import com.example.sd_project.business.service.ProductService;
 import com.example.sd_project.business.service.UserService;
@@ -16,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 
 @RestController
@@ -28,12 +25,10 @@ public class ProductController {
     @Autowired
     private UserService userService;
 
-
     private Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @GetMapping("/admin")
     public ResponseEntity getProductsByAdmin(@RequestHeader String token){
-
         User user = JwtToken.getUser(token);
         if(user == null){
             logger.warn("An unauthorized access was atempted at endpoint: "+ "/admin");
@@ -67,7 +62,6 @@ public class ProductController {
 
     @PostMapping("/admin")
     public ResponseEntity addProduct(@RequestHeader String token, @RequestBody ProductDTO productDTO){
-
         User user = JwtToken.getUser(token);
         if(user == null){
             logger.warn("An unauthorized access was atempted at endpoint: "+ "/admin");
@@ -104,7 +98,6 @@ public class ProductController {
 
     @PatchMapping("/admin")
     public ResponseEntity updateProduct(@RequestHeader String token, @RequestBody ProductDTO productDTO){
-
         User user = JwtToken.getUser(token);
         if(user == null){
             logger.warn("An unauthorized access was atempted at endpoint: "+ "/admin");
@@ -141,7 +134,6 @@ public class ProductController {
 
     @GetMapping("/products")
     public ResponseEntity getAllProducts(){
-
         ArrayList<Product> productsList = productService.getAllProducts();
         ArrayList<ProductDTO> products = new ArrayList<>();
         for(int i=0;i<productsList.size();i++){

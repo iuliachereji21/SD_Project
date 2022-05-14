@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
@@ -24,7 +23,6 @@ public class DesignService {
     private ProductService productService;
 
     public Design addDesign(DesignDTO designDTO, Customer customer) throws Exception{
-
         if(designDTO.getTitle()==null || designDTO.getTitle().equals(""))
             throw new Exception("title required");
 
@@ -67,7 +65,6 @@ public class DesignService {
     }
 
     public void createPdfOfDesignShoppingList(DesignDTO designDTO, HttpServletResponse response){
-
         ArrayList<Product> products = new ArrayList<>();
         for(ProductDTO productDTO : designDTO.getProducts()){
             products.add(productService.getProductById(productDTO.getId()));
@@ -116,8 +113,6 @@ public class DesignService {
 
             document.close();
         }
-        catch (Exception e){
-
-        }
+        catch (Exception e){}
     }
 }

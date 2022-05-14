@@ -1,6 +1,5 @@
 package com.example.sd_project.business.DTOs;
 
-
 import com.example.sd_project.business.model.Product;
 
 public class ProductDTO {
@@ -9,6 +8,17 @@ public class ProductDTO {
     private String price;
     private String category;
     private String link;
+
+    public ProductDTO(Product product) {
+        this.id=product.getId();
+        this.category= product.getCategory();
+        this.link = product.getLink();
+        this.name = product.getName();
+        this.price = String.valueOf(product.getPrice());
+    }
+
+    public ProductDTO() {
+    }
 
     public long getId() {
         return id;
@@ -50,14 +60,4 @@ public class ProductDTO {
         this.link = link;
     }
 
-    public ProductDTO(Product product) {
-        this.id=product.getId();
-        this.category= product.getCategory();
-        this.link = product.getLink();
-        this.name = product.getName();
-        this.price = String.valueOf(product.getPrice());
-    }
-
-    public ProductDTO() {
-    }
 }

@@ -1,13 +1,7 @@
 package com.example.sd_project.business.DTOs;
 
-import com.example.sd_project.business.model.Customer;
 import com.example.sd_project.business.model.Design;
 import com.example.sd_project.business.model.Product;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;

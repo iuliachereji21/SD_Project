@@ -9,6 +9,18 @@ public class RegisterDTO {
     private String phone;
     private String occupation;
 
+    public RegisterDTO(String name, String email, String password, String repeatedPassword, String phone, String occupation) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.repeatedPassword = repeatedPassword;
+        this.phone = phone;
+        this.occupation = occupation;
+    }
+
+    public RegisterDTO() {
+    }
+
     public String getName() {
         return name;
     }

@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class PasswordHash {
+
     public static String hashPassword(String password){
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA");

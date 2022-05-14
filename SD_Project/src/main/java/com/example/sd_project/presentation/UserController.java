@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
-import java.util.regex.Pattern;
-
 @RestController
 public class UserController {
 
@@ -30,7 +27,6 @@ public class UserController {
 
     @PostMapping( "/login")
     public ResponseEntity logIn(@RequestBody LogInDTO logInDTO){
-
         try{
             User user = userService.logIn(logInDTO);
             String token = JwtToken.getJwtoken(user);
@@ -47,7 +43,6 @@ public class UserController {
                         .body(new UserDTO(user.getId(), false,token));
             }
 
-
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -57,7 +52,6 @@ public class UserController {
 
     @PostMapping( "/register")
     public ResponseEntity registerUser(@RequestBody RegisterDTO registerDTO){
-
         try{
             Customer customer = (Customer) userService.register(registerDTO);
 

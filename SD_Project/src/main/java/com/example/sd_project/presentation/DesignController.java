@@ -1,7 +1,6 @@
 package com.example.sd_project.presentation;
 
 import com.example.sd_project.business.DTOs.DesignDTO;
-import com.example.sd_project.business.DTOs.ProductDTO;
 import com.example.sd_project.business.DTOs.ResponseDTO;
 import com.example.sd_project.business.model.*;
 import com.example.sd_project.business.service.DesignService;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
@@ -79,7 +77,6 @@ public class DesignController {
 
     @GetMapping("/myDesigns")
     public ResponseEntity getDesignsByCustomer(@RequestHeader String token){
-
         User user = JwtToken.getUser(token);
         if(user == null){
             logger.warn("An unauthorized access was atempted at endpoint: "+ "/myDesigns");
@@ -113,7 +110,6 @@ public class DesignController {
 
     @PatchMapping("/myDesigns")
     public ResponseEntity updateDesign(@RequestHeader String token, @RequestBody DesignDTO designDTO){
-
         User user = JwtToken.getUser(token);
         if(user == null){
             logger.warn("An unauthorized access was atempted at endpoint: "+ "/myDesigns");
@@ -150,13 +146,10 @@ public class DesignController {
 
     @PostMapping("/designs/pdf")
     public void exportMenuToPdf(@RequestBody DesignDTO designDTO, HttpServletResponse response){
-
         response.setContentType("application/pdf");
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=Shopping List "+designDTO.getTitle()+".pdf";
         response.setHeader(headerKey,headerValue);
         designService.createPdfOfDesignShoppingList(designDTO, response);
-
     }
-
 }
