@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -23,6 +22,12 @@ public class UserService {
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
+    /**
+     * Finds the user in the database whose credentials correspond to the given inputs
+     * @param logInDTO the object containing the log in credentials
+     * @return the user found in the database if the credentials were correct
+     * @throws Exception if credentials are misssing or incorrect
+     */
     public User logIn(LogInDTO logInDTO) throws Exception{
         if(logInDTO.getEmail()==null || logInDTO.getEmail().equals(""))
             throw new Exception("email required");
@@ -49,6 +54,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Adds a new user into the databse
+     * @param registerDTO the object that holds the introduced data
+     * @return the new user that was created if data was ok
+     * @throws Exception if invalid or missing data or if email already present in the database
+     */
     public User register(RegisterDTO registerDTO) throws Exception {
         if(registerDTO.getEmail()==null || registerDTO.getEmail().equals(""))
             throw new Exception("email required");
@@ -98,8 +109,17 @@ public class UserService {
         }
     }
 
+    /**
+     * Searches the database for the user having the given email
+     * @param email the email that we search for
+     * @return the found user
+     */
     public User getUserByEmail(String email){
         ArrayList<User> users = new ArrayList<>(userRepository.findByEmail(email));
         return users.get(0);
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 }
